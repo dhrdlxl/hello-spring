@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 //Option + Enter로 implement method를 편하게 할 수 있다.
-@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     //실무에서는 동시성 문제로 ConcurrentHashMap, AtomicLong을 사용한다.
