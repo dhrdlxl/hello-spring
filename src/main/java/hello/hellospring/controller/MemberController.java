@@ -4,8 +4,11 @@ import hello.hellospring.domain.Member;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 //Component Scan
 @Controller
@@ -25,12 +28,12 @@ public class MemberController {
     }
 
     @GetMapping("/members/new")
-    public String createForm(){
+    public String createForm() {
         return "members/createMemberForm";
     }
 
     @PostMapping("/members/new")
-    public String create(MemberForm form){
+    public String create(MemberForm form) {
         Member member = new Member();
 
         //사용자가 이름을 등록하면 home.html의 name
@@ -40,4 +43,12 @@ public class MemberController {
         //홈 화면으로 돌려보낸다.
         return "redirect:/";
     }
+
+    @GetMapping("/members")
+    public String list(Model model){
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members",members);
+        return "members/memberList";
+    }
+
 }
