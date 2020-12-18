@@ -1,6 +1,7 @@
 package hello.hellospring;
 
 import hello.hellospring.repository.JdbcMemberRepository;
+import hello.hellospring.repository.JdbcTemplateMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import hello.hellospring.service.MemberService;
@@ -37,6 +38,8 @@ public class SpringConfig {
         OCP(Open-Closed Principle) 적용 -> 확장에는 열려있고, 수정 및 변경에는 닫혀있다.
         DI를 이용해 기존 코드를 전혀 손대지 않고(Member Service 코드 수정 x) 설정(SpringConfig 수정)만으로 구현 클래스 변경(메모리 -> H2 DB)
          */
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
