@@ -19,7 +19,7 @@ public class SpringConfig {
     @Autowired
     public SpringConfig(DataSource dataSource) {
         /*
-        Spring Boot가 application.properties(DB 커넥션 정보)를 바탕으 DataSource(DB 커넥션 획득할 때 사용하는 객체)를 빈으로 만들어 둔다.
+        Spring Boot가 application.properties(DB 커넥션 정보)를 바탕으로 DataSource(DB 커넥션 획득할 때 사용하는 객체)를 빈으로 만들어 둔다.
         따라서 아래와 같이 DI를 통해 사용하면 된다.
          */
         this.dataSource = dataSource;
