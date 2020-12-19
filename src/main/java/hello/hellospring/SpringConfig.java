@@ -1,28 +1,32 @@
 package hello.hellospring;
 
-import hello.hellospring.repository.JdbcMemberRepository;
-import hello.hellospring.repository.JdbcTemplateMemberRepository;
-import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
+import hello.hellospring.repository.*;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
 
 @Configuration
 public class SpringConfig {
 
-    private DataSource dataSource;
+//    private DataSource dataSource;
+//
+//    @Autowired
+//    public SpringConfig(DataSource dataSource) {
+//        /*
+//        Spring Boot가 application.properties(DB 커넥션 정보)를 바탕으로 DataSource(DB 커넥션 획득할 때 사용하는 객체)를 빈으로 만들어 둔다.
+//        따라서 아래와 같이 DI를 통해 사용하면 된다.
+//         */
+//        this.dataSource = dataSource;
+//    }
+
+    private EntityManager em;
 
     @Autowired
-    public SpringConfig(DataSource dataSource) {
-        /*
-        Spring Boot가 application.properties(DB 커넥션 정보)를 바탕으로 DataSource(DB 커넥션 획득할 때 사용하는 객체)를 빈으로 만들어 둔다.
-        따라서 아래와 같이 DI를 통해 사용하면 된다.
-         */
-        this.dataSource = dataSource;
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
 
     @Bean
@@ -40,6 +44,8 @@ public class SpringConfig {
          */
 //        return new JdbcMemberRepository(dataSource);
 
-        return new JdbcTemplateMemberRepository(dataSource);
+//        return new JdbcTemplateMemberRepository(dataSource);
+
+        return new JpaMemberRepository(em);
     }
 }
